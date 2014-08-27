@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>SVG-map demo</title>
+
+    <style>
+        .map-container {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .hint {
+            color: #555;
+            font-style: italic;
+        }
+        #map {
+            width:  1080px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <h1>Russian regions map</h1>
+        <div id="map"></div>
+
+        <small class"hint">Take a look at the console output.</small>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="./lib/raphael-min.js"></script>
+    <script src="./lib/jquery.svgmap.js"></script>
+    <script src="./data/regions.js"></script>
+    <script>
+        $(function() {
+            $("#map").svgmap({
+                data: regions,
+                callback: {
+                    init: function() {
+                        console.info("Map initialized.");
+                    },
+                    hover: [
+                        function() {
+                            console.info("Region {" + this.code + "} mouse enter.");
+                        },
+                        function() {
+                            console.info("Region {" + this.code + "} mouse leave.");
+                        }
+                    ],
+                    click: function() {
+                        console.info("Region {" + this.code + "} click.");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
